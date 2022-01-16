@@ -13,6 +13,7 @@ function main(currentTime) {
 }
 
 function draw() {
+    gameBoard.innerHTML = '';
     drawSnake(gameBoard);
 };
 
