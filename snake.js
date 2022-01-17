@@ -1,9 +1,9 @@
 import {getSnakeDirection as getSnakeDirection} from './input.js';
-import {foodCoord as foodCoord} from './food.js';
+import {foodCoord as foodCoord, updateFoodCoord as changeFoodCoords} from './food.js';
 
 export const SNAKE_SPEED = 3;
 export const SNAKE_GROWS = 3;
-let snakeBody = [{x: 10, y: 11}];
+export let snakeBody = [{x: 10, y: 11}];
 let newSnakePart = {x: 0, y: 0};
 
 export function update() {
@@ -20,6 +20,7 @@ export function update() {
             };
             snakeBody.push(newSnakePart);
         }
+        changeFoodCoords();
     }
 };
 
