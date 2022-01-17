@@ -1,4 +1,4 @@
-let snakeDirection = {x: 0, y: 0};
+export let snakeDirection = {x: 0, y: 0};
 let lastSnakeDirection;
 
 window.addEventListener("keydown", event => {
