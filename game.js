@@ -1,4 +1,4 @@
-import {SNAKE_SPEED as SNAKE_SPEED, draw as drawSnake, update as updateSnake} from './snake.js';
+import {SNAKE_SPEED, draw as drawSnake, update as updateSnake, snakeLength} from './snake.js';
 import {draw as drawFood, update as updateFood} from './food.js';
 
 let previousTime = 0;
@@ -6,6 +6,11 @@ let snakeGridRow;
 let snakeGridColumn;
 
 function main(currentTime) {
+    if (snakeLength >= 441) {
+        alert("You won! :D");
+        document.location.reload();
+        return;
+    }
     if (snakeGridRow < 1 || snakeGridRow > 21 || snakeGridColumn < 1 || snakeGridColumn > 21) {
         alert("You lose! :(")
         document.location.reload();

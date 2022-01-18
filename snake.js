@@ -3,6 +3,7 @@ import {foodCoord as foodCoord, updateFoodCoord as changeFoodCoords} from './foo
 
 export const SNAKE_SPEED = 8;
 export const SNAKE_GROWS = 3;
+export let snakeLength = 1;
 export let snakeBody = [{x: 10, y: 11}];
 let newSnakePart = {x: 0, y: 0};
 
@@ -22,6 +23,7 @@ export function update() {
             };
             snakeBody.push(newSnakePart);
         }
+        snakeLength += SNAKE_GROWS;
         changeFoodCoords(snakeBody);
     }
 };
