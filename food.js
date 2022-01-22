@@ -1,28 +1,27 @@
-export let foodCoord = {x: 15, y: 15};
-let arrayOfSnakeFreeY = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
-let arrayOfSnakeFreeX = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
-let snakeCoordsX = [];
-let snakeCoordsY = [];
+import {growSnake,onSnake,increaseScore,SNAKE_GROWS,compareCoords} from './snake.js';
 
-function getRandomWithManyExclusions(originalArray, arrayOfIndexesToExclude) {
-    var rand = null;
-    while (rand === null || arrayOfIndexesToExclude.includes(rand)) {
-        rand = Math.round(Math.random() * (originalArray.length - 1) + 1);
+export let foodCoord = {x: 15, y: 15};
+
+function changeFoodCoord() {
+    let newFoodCoord;
+    while (newFoodCoord == null || onSnake(newFoodCoord)) {
+        newFoodCoord = randomPosition();
     }
-    return rand;
+    return newFoodCoord;
 }
 
-export function updateFoodCoord(snakeBody) {
-    for (let i = 0; i < snakeBody.length; i++) {
-        snakeCoordsX.push(snakeBody[i].x);
-        snakeCoordsY.push(snakeBody[i].y);
+function randomPosition() {
+    return {
+        x: Math.floor(Math.random() * 21)+1,
+        y: Math.floor(Math.random() * 21)+1
     }
-    foodCoord.x = getRandomWithManyExclusions(arrayOfSnakeFreeX, snakeCoordsX);
-    foodCoord.y = getRandomWithManyExclusions(arrayOfSnakeFreeY, snakeCoordsY);
 };
 
 export function update() {
-
+    if (onSnake(foodCoord)) {
+        growSnake(foodCoord);
+        foodCoord = changeFoodCoord();
+    }
 };
 
 export function draw(gameBoard) {
@@ -31,6 +30,4 @@ export function draw(gameBoard) {
     food.style.gridColumnStart = foodCoord.x;
     food.className = "food";
     gameBoard.append(food);
-    snakeCoordsX = [];
-    snakeCoordsY = [];
 };

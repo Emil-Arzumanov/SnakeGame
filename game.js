@@ -1,4 +1,11 @@
-import {SNAKE_SPEED, draw as drawSnake, update as updateSnake, snakeLength} from './snake.js';
+import {
+    SNAKE_SPEED,
+    draw as drawSnake,
+    update as updateSnake,
+    increaseScore,
+    snakeLength,
+    ifSnakeAteItself
+} from './snake.js';
 import {draw as drawFood, update as updateFood} from './food.js';
 
 let previousTime = 0;
@@ -11,8 +18,8 @@ function main(currentTime) {
         document.location.reload();
         return;
     }
-    if (snakeGridRow < 1 || snakeGridRow > 21 || snakeGridColumn < 1 || snakeGridColumn > 21) {
-        alert("You lose! :(")
+    if (snakeGridRow < 1 || snakeGridRow > 21 || snakeGridColumn < 1 || snakeGridColumn > 21 || ifSnakeAteItself) {
+        alert(`You lose! :( Your score is: ${snakeLength}`);
         document.location.reload();
         return;
     }
